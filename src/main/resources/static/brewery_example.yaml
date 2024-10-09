@@ -1,0 +1,216 @@
+openapi: 3.1.0
+info:
+  version: 1.0-oas3.1
+  title: Spring Framework Guru OpenAPI Course
+  description: For Udemy course about OpenAPI by John Thompson
+  contact:
+    name: John Thompson
+    url: 'https://springframework.guru'
+    email: jt@aol.com
+  license:
+    name: Apache 2.0
+    url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
+  termsOfService: 'http://example.com/terms'
+servers:
+  - url: 'https://dev.example.com'
+    description: Development Server
+  - url: 'https://qa.example.com'
+    description: QA Server
+  - url: 'https://prod.example.com'
+    description: Production Server
+paths:
+  /v1/customers:
+    get:
+      description: Returns all customers.
+      responses:
+        '200':
+          description: List of Customers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerList'
+        '404':
+          description: On no! We have no customers. This isn't Cheers.
+  /v1/beers:
+    get:
+      description: Returns all beers.
+      responses:
+        '200':
+          description: List of Beers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BeerList'
+        '404':
+          description: Oh no! We're all out of beer! ☹
+  /v1/nachos:
+    get:
+      description: Get some nachos.
+      deprecated: true
+      responses:
+        '404':
+          description: We don't serve nachos anymore.
+components:
+  schemas:
+    Address:
+      type: object
+      description: Address object
+      properties:
+        line1:
+          type: string
+          examples:
+            - 123 Stone
+        city:
+          type: string
+          examples:
+            - Bedrock
+        stateCode:
+          type: string
+          minLength: 2
+          maxLength: 2
+          description: Two letter state code
+          enum:
+            - MN
+            - ND
+            - SD
+          default: MN
+          examples:
+            - MN
+        zipcode:
+          type: string
+          pattern: '^\d{5}(?:[-]\d{4})?$'
+          examples:
+            - '90210-1234 or 90210'
+    Beer:
+      type: object
+      description: Beer object
+      properties:
+        name:
+          type: string
+          examples:
+            - Black Label
+        style:
+          enum:
+            - ALE
+            - PALE_ALE
+            - IPA
+            - WHEAT
+            - LAGER
+        upc:
+          type: string
+          pattern: '\d{13}'
+          minLength: 13
+          maxLength: 13
+        price:
+          type: number
+          format: float
+          examples:
+            - 2.99
+        quantity:
+          type: integer
+          format: int32
+        brewery:
+          $ref: '#/components/schemas/Brewery'
+    BeerList:
+      type: array
+      minItems: 1
+      maxItems: 10
+      items:
+        $ref: '#/components/schemas/Beer'
+    BeerPagedList:
+      type: object
+      properties:
+        content:
+          $ref: '#/components/schemas/BeerList'
+      allOf:
+        - $ref: '#/components/schemas/PagedResponse'
+    Brewery:
+      type: object
+      description: Brewery object
+      properties:
+        location:
+          $ref: '#/components/schemas/Address'
+        name:
+          type: string
+          minLength: 1
+          maxLength: 25
+          examples:
+            - Hamm's
+    Customer:
+      type: object
+      description: Customer object
+      properties:
+        id:
+          type: string
+          format: uuid
+        firstName:
+          type: string
+          minLength: 1
+          maxLength: 25
+          examples:
+            - Fred
+        lastName:
+          type: string
+          minLength: 1
+          maxLength: 25
+          examples:
+            - Flintstone
+        address:
+          $ref: '#/components/schemas/Address'
+    CustomerList:
+      type: array
+      minItems: 1
+      maxItems: 100
+      items:
+        $ref: '#/components/schemas/Customer'
+    PagedResponse:
+      type: object
+      properties:
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/PagedResponsePageable'
+        size:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/RagedResponsePageableSort'
+        totalElements:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+    RagedResponsePageableSort:
+      type: object
+      properties:
+        sorted:
+          type: boolean
+        unsorted:
+          type: boolean
+    PagedResponsePageable:
+      type: object
+      properties:
+        offset:
+          type: integer
+          format: int32
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        paged:
+          type: boolean
+        unpaged:
+          type: boolean
+        sort:
+          $ref: '#/components/schemas/RagedResponsePageableSort'
