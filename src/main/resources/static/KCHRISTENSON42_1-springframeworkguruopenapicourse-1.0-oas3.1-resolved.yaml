@@ -37,51 +37,14 @@ paths:
 
   /v1/beers:
     get:
-      description: "Returns all beers if they exist; otherwise, return not found."
+      description: "Returns all beers."
       responses:
         '200':
           description: "List of Beers"
           content:
             application/json:
               schema:
-                type: array
-                minItems: 1
-                maxItems: 10
-                items:
-                  type: object
-                  description: "Beer object"
-                  properties:
-                    name:
-                      type: string
-                      examples:
-                        - "Black Label"
-                    style:
-                      enum: ["ALE", "PALE_ALE", "IPA", "WHEAT", "LAGER"]
-                    upc:
-                      type: string
-                      pattern: '\d{13}'
-                      minLength: 13
-                      maxLength: 13
-                    price:
-                      type: number
-                      format: float
-                      examples:
-                        - 2.99
-                    quantity:
-                      type: integer
-                      format: int32
-                    brewery:
-                      type: object
-                      description: "Brewery object"
-                      properties:
-                        name:
-                          type: string
-                          minLength: 1
-                          maxLength: 25
-                          examples:
-                            - "Hamm's"
-                        location:
-                          $ref: "#/components/schemas/address"
+                $ref: "#/components/schemas/beer-list"
         '404':
           description: "Oh no! We're all out of beer! \u2639"
 
@@ -121,7 +84,7 @@ components:
           type: string
           examples:
             - "Bedrock"
-        statecode:
+        state-code:
           type: string
           minLength: 2
           maxLength: 2
@@ -167,3 +130,48 @@ components:
       maxItems: 100
       items:
         '$ref': "#/components/schemas/Customer"
+
+    brewery:
+      type: object
+      title: "Brewery"
+      description: "Brewery object"
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 25
+          examples:
+            - "Hamm's"
+        location:
+          $ref: "#/components/schemas/address"
+    beer:
+      type: object
+      description: "Beer object"
+      properties:
+        name:
+          type: string
+          examples:
+            - "Black Label"
+        style:
+          enum: [ "ALE", "PALE_ALE", "IPA", "WHEAT", "LAGER" ]
+        upc:
+          type: string
+          pattern: '\d{13}'
+          minLength: 13
+          maxLength: 13
+        price:
+          type: number
+          format: float
+          examples:
+            - 2.99
+        quantity:
+          type: integer
+          format: int32
+        brewery:
+          $ref: "#/components/schemas/address"
+    beer-list:
+      type: array
+      minItems: 1
+      maxItems: 10
+      items:
+        $ref: "#/components/schemas/beer"
