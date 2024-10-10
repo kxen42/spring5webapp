@@ -40,7 +40,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BeerList'
+                $ref: '#/components/schemas/BeerPagedList'
         '404':
           description: Oh no! We're all out of beer! ☹
   /v1/nachos:
@@ -182,14 +182,14 @@ components:
           type: integer
           format: int32
         sort:
-          $ref: '#/components/schemas/RagedResponsePageableSort'
+          $ref: '#/components/schemas/PagedResponsePageableSort'
         totalElements:
           type: integer
           format: int32
         totalPages:
           type: integer
           format: int32
-    RagedResponsePageableSort:
+    PagedResponsePageableSort:
       type: object
       properties:
         sorted:
@@ -213,4 +213,4 @@ components:
         unpaged:
           type: boolean
         sort:
-          $ref: '#/components/schemas/RagedResponsePageableSort'
+          $ref: '#/components/schemas/PagedResponsePageableSort'
