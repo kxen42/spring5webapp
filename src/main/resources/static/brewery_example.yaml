@@ -24,21 +24,9 @@ paths:
       description: Returns all customers.
       # parameters in https://spec.openapis.org/oas/latest.html#path-item-object
       # parameter object https://spec.openapis.org/oas/latest.html#parameter-object
-      parameters:
-        - name: pageNumber
-          in: query
-          description: Page Number
-          schema:
-            type: integer
-            format: int32
-            default: 1
-        - name: pageSize
-          in: query
-          description: Page Size
-          schema:
-            type: integer
-            format: int32
-            default: 25
+      parameters: # uses query parameters
+        - $ref: "#/components/parameters/PageNumberParameter"
+        - $ref: "#/components/parameters/PageSizeParameter"
       responses:
         '200':
           description: List of Customers
@@ -52,20 +40,8 @@ paths:
     get:
       description: Returns all beers.
       parameters:
-        - name: pageNumber
-          in: query
-          description: Page Number
-          schema:
-            type: integer
-            format: int32
-            default: 1
-        - name: pageSize
-          in: query
-          description: Page Size
-          schema:
-            type: integer
-            format: int32
-            default: 25
+        - $ref: "#/components/parameters/PageNumberParameter"
+        - $ref: "#/components/parameters/PageSizeParameter"
       responses:
         '200':
           description: List of Beers
@@ -255,3 +231,20 @@ components:
           type: boolean
         sort:
           $ref: '#/components/schemas/PagedResponsePageableSort'
+  parameters:
+    PageNumberParameter:
+      name: pageNumber
+      in: query
+      description: Page Number
+      schema:
+        type: integer
+        format: int32
+        default: 1
+    PageSizeParameter:
+      name: pageSize
+      in: query
+      description: Page Size
+      schema:
+        type: integer
+        format: int32
+        default: 25
