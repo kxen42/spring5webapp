@@ -21,7 +21,7 @@ servers:
 paths:
   /v1/customers:
     get:
-      description: Returns all customers.
+      description: Get all customers.
       # parameters in https://spec.openapis.org/oas/latest.html#path-item-object
       # parameter object https://spec.openapis.org/oas/latest.html#parameter-object
       parameters: # uses query parameters
@@ -38,24 +38,25 @@ paths:
           description: On no! We have no customers. This isn't Cheers.
   /v1/customers/{customerId}: # uses path variables
     get:
-      description: Returns customer for given customerId.
+      description: Get customer for given customerId.
       parameters:
         - name: customerId
           description: Customer Id
           in: path
           schema:
-            type: uuid
+            type: string
+            format: uuid
           required: true
       responses:
         '200':
-          description: 'The customer for the given customerId'
+          description: 'Customer for given customerId'
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Customer"
   /v1/beers:
     get:
-      description: Returns all beers.
+      description: Get all beers.
       parameters:
         - $ref: "#/components/parameters/PageNumberParameter"
         - $ref: "#/components/parameters/PageSizeParameter"
@@ -68,6 +69,18 @@ paths:
                 $ref: '#/components/schemas/BeerPagedList'
         '404':
           description: Oh no! We're all out of beer! ☹
+  /v1/beers/{beerId}:
+    get:
+      description: Get beer for given id.
+      parameters:
+        - $ref: "#/components/parameters/BeerId"
+      responses:
+        '200':
+          description: Beer for given beerId.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Beer"
   /v1/nachos:
     get:
       description: Get some nachos.
@@ -249,6 +262,14 @@ components:
         sort:
           $ref: '#/components/schemas/PagedResponsePageableSort'
   parameters:
+    BeerId:
+      name: beerId
+      in: path
+      description: Beer Id
+      schema:
+        type: string
+        format: uuid
+      required: true
     PageNumberParameter:
       name: pageNumber
       in: query
