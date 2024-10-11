@@ -22,18 +22,50 @@ paths:
   /v1/customers:
     get:
       description: Returns all customers.
+      # parameters in https://spec.openapis.org/oas/latest.html#path-item-object
+      # parameter object https://spec.openapis.org/oas/latest.html#parameter-object
+      parameters:
+        - name: pageNumber
+          in: query
+          description: Page Number
+          schema:
+            type: integer
+            format: int32
+            default: 1
+        - name: pageSize
+          in: query
+          description: Page Size
+          schema:
+            type: integer
+            format: int32
+            default: 25
       responses:
         '200':
           description: List of Customers
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomerList'
+                $ref: '#/components/schemas/CustomerPagedList'
         '404':
           description: On no! We have no customers. This isn't Cheers.
   /v1/beers:
     get:
       description: Returns all beers.
+      parameters:
+        - name: pageNumber
+          in: query
+          description: Page Number
+          schema:
+            type: integer
+            format: int32
+            default: 1
+        - name: pageSize
+          in: query
+          description: Page Size
+          schema:
+            type: integer
+            format: int32
+            default: 25
       responses:
         '200':
           description: List of Beers
@@ -123,6 +155,8 @@ components:
         content:
           $ref: '#/components/schemas/BeerList'
       allOf:
+        # all properties from each schema listed here is inherited
+        # there is no way to exclude a property
         - $ref: '#/components/schemas/PagedResponse'
     Brewery:
       type: object
@@ -163,6 +197,13 @@ components:
       maxItems: 100
       items:
         $ref: '#/components/schemas/Customer'
+    CustomerPagedList:
+      type: object
+      properties:
+        content:
+          $ref: '#/components/schemas/CustomerList'
+      allOf:
+        - $ref: '#/components/schemas/PagedResponse'
     PagedResponse:
       type: object
       properties:
