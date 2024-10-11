@@ -36,6 +36,23 @@ paths:
                 $ref: '#/components/schemas/CustomerPagedList'
         '404':
           description: On no! We have no customers. This isn't Cheers.
+  /v1/customers/{customerId}: # uses path variables
+    get:
+      description: Returns customer for given customerId.
+      parameters:
+        - name: customerId
+          description: Customer Id
+          in: path
+          schema:
+            type: uuid
+          required: true
+      responses:
+        '200':
+          description: 'The customer for the given customerId'
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Customer"
   /v1/beers:
     get:
       description: Returns all beers.
