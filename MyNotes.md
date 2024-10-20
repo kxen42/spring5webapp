@@ -9,6 +9,19 @@ Items classes and resources for OpenAPI work is in
 
 [SwaggerHub](https://app.swaggerhub.com/apis/KCHRISTENSON42_1/openapi-brewery/1.0-oas3.1#/default/get_v1_beers__beerId_)
 
+
+# API Design Guides
+[API Guides Portal: Definitions, Examples, and Tutorials to Get Started | Stoplight](https://stoplight.io/guides)
+
+[Introduction  -  REST API Tutorial](https://www.restapitutorial.com/introduction)
+
+[API Development: A Comprehensive Guide to Building Modern APIs](https://www.getambassador.io/blog/api-development-comprehensive-guide#body__7a44950c2ef3)
+
+[Principles of Web API Design: Delivering Value with APIs and Microservices](https://www.oreilly.com/library/view/principles-of-web/9780137355754/) by James Higgingotham. Published December, 2021.
+
+[Mastering API Architecture
+Mastering API Architecture](https://www.oreilly.com/library/view/mastering-api-architecture/9781492090625/) by James Gough, Daniel Bryant, Matthew Auburn. Published October, 2022.
+
 # Specific Sections of OpenAPI Specification v3.1.0
 [OpenAPI Object](https://spec.openapis.org/oas/latest.html#openapi-object) openapi _required_<br>
 [Info Object](https://spec.openapis.org/oas/latest.html#info-object) openapi.info _required_<br>

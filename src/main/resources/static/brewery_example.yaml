@@ -40,6 +40,25 @@ paths:
                 $ref: '#/components/schemas/CustomerPagedList'
         '404':
           description: On no! We have no customers. This isn't Cheers.
+    post:
+      summary: Create new customer.
+      description: Creates new Customer.
+      tags:
+        - Customers
+      operationId: createCustomerV1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Customer"
+      responses:
+        '201':
+          description: Customer created
+        '401':
+          description: Not authorized
+
+
   /v1/customers/{customerId}: # uses path variables
     get:
       summary: Get customer for given customer Id.
@@ -57,11 +76,15 @@ paths:
           required: true
       responses:
         '200':
-          description: 'Customer for given customerId'
+          description: 'Found Customer for given customerId'
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Customer"
+                $ref: '#/components/schemas/Customer'
+        '400':
+          description: Request body failed domain validation.
+      #   '404':
+      #    description: Customer not found.
   /v1/beers:
     get:
       summary: Get all beers.
@@ -81,6 +104,22 @@ paths:
                 $ref: '#/components/schemas/BeerPagedList'
         '404':
           description: Oh no! We're all out of beer! ☹
+    post:
+      summary: Create new beer.
+      description: Creates new Beer.
+      tags:
+        - Beers
+      operationId: createBeerV1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Beer'
+      responses:
+        '201':
+          description: Beer created.
+
   /v1/beers/{beerId}:
     get:
       summary: Get beer for given id.
