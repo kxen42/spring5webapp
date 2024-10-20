@@ -23,6 +23,8 @@ paths:
     get:
       summary: Get all customers.
       description: Get all Customers for optional pageNummber and pageSize.
+      tags:
+        - Customers
       # parameters in https://spec.openapis.org/oas/latest.html#path-item-object
       # parameter object https://spec.openapis.org/oas/latest.html#parameter-object
       parameters: # uses query parameters
@@ -41,6 +43,8 @@ paths:
     get:
       summary: Get customer for given customer Id.
       description: Get Customer for requied customerId.
+      tags:
+        - Customers
       parameters:
         - name: customerId
           description: Customer Id
@@ -60,6 +64,8 @@ paths:
     get:
       summary: Get all beers.
       description: Get all Beers for optional pageNumber and pageSize.
+      tags:
+        - Beers
       parameters:
         - $ref: "#/components/parameters/PageNumberParameter"
         - $ref: "#/components/parameters/PageSizeParameter"
@@ -76,6 +82,8 @@ paths:
     get:
       summary: Get beer for given id.
       description: Get Beer for required beerId.
+      tags:
+        - Beers
       parameters:
         - $ref: "#/components/parameters/BeerId"
       responses:
@@ -89,6 +97,9 @@ paths:
     get:
       summary: Get some nachos.
       description: Get all the Nachos.
+      tags:
+        - Food
+        - Deprecated
       deprecated: true
       responses:
         '404':
