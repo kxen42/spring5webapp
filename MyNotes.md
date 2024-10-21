@@ -1,13 +1,11 @@
-# My Notes
+# My Notes on API Design and OpenAPI
 
 Rather than using OAS v3.0.2 that the course covers, I am using OAS v3.1.0.
 
-Items classes and resources for OpenAPI work is in
-[brewery_example.yaml](src/main/resources/static/brewery_example.yaml)
-
-[KCHRISTENSON42_1-springframeworkguruopenapicourse-1.0-oas3.1-resolved.yaml](static/KCHRISTENSON42_1-springframeworkguruopenapicourse-1.0-oas3.1-resolved.yaml)
-
-[SwaggerHub](https://app.swaggerhub.com/apis/KCHRISTENSON42_1/openapi-brewery/1.0-oas3.1#/default/get_v1_beers__beerId_)
+Most important resources for this repo:
+- [brewery_example.yaml](src/main/resources/static/brewery_example.yaml)
+- [KCHRISTENSON42_1-springframeworkguruopenapicourse-1.0-oas3.1-resolved.yaml](static/KCHRISTENSON42_1-springframeworkguruopenapicourse-1.0-oas3.1-resolved.yaml)
+- [SwaggerHub for this API](https://app.swaggerhub.com/apis/KCHRISTENSON42_1/openapi-brewery/1.0-oas3.1#/default/get_v1_beers__beerId_)
 
 
 # API Design Guides
@@ -27,15 +25,32 @@ Mastering API Architecture](https://www.oreilly.com/library/view/mastering-api-a
 [REST in Practice](https://www.oreilly.com/library/view/rest-in-practice/9781449383312/) by Jim Webber, Savas Parastatidis, Ian Robinson. Published September, 2010.
 
 # Specific Sections of OpenAPI Specification v3.1.0
-[OpenAPI Object](https://spec.openapis.org/oas/latest.html#openapi-object) openapi _required_<br>
-[Info Object](https://spec.openapis.org/oas/latest.html#info-object) openapi.info _required_<br>
-[Paths Object](https://spec.openapis.org/oas/latest.html#paths-object) openapi.paths _required_<br>
-[Server Object]() openapi.servers
+### Required
+[OpenAPI Object](https://spec.openapis.org/oas/latest.html#openapi-object) openapi<br>
+[Info Object](https://spec.openapis.org/oas/latest.html#info-object) openapi.info<br>
+[Paths Object](https://spec.openapis.org/oas/latest.html#paths-object) openapi.paths<br>
+[Server Object](https://spec.openapis.org/oas/latest.html#server-object) openapi.servers<br>
+
+### Optional
+[Schema Object](https://spec.openapis.org/oas/latest.html#schema-object)<br>
+- [JSON Schema Validation 9.4 "readOnly and "writeOnly"](https://datatracker.ietf.org/doc/html/draft-bhutton-json-schema-validation-00#section-9.4) 
+    - readOnly example use is for ID created by service.
+    - writeOnly example use is for password provided by client.
 
 # Resources
+
+#### Learning
+[Learn OpenAPI Specification (OAS)](https://learn.openapis.org)<br>
 [Learn X in Y minutes Where X = YAML](https://learnxinyminutes.com/docs/yaml/)<br>
+
+
+#### Specifications
+[JSON Schema Specification](https://json-schema.org/specification)<br>
+[JSON Schema Validation](https://datatracker.ietf.org/doc/html/draft-bhutton-json-schema-validation-00)<br>
 [OpenAPI Home](https://www.openapis.org)<br>
 [GitHub OpenAPI Specification - OAS](https://github.com/OAI/OpenAPI-Specification/)<br>
+
+#### Tools
 [SwaggerHub](http://swagger.io/tools/swaggerhub)<br>
 [Stoplight](https://stoplight.io) EDJ used this. "Design, document, and build APIs faster.
 "<br>

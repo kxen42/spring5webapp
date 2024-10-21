@@ -61,7 +61,8 @@ paths:
               schema:
                 type: string
                 format: uri
-                example: https://example.com/customers/{assignedCustomerId}
+                examples:
+                  - https://example.com/customers/{assignedCustomerId}
 
         '401':
           description: Not authorized
@@ -133,7 +134,8 @@ paths:
               schema:
                 type: string
                 format: uri
-                example: https://example.com/beers/{assignedBeerId}
+                examples:
+                  - https://example.com/beers/{assignedBeerId}
 
   /v1/beers/{beerId}:
     get:
@@ -258,6 +260,7 @@ components:
         id:
           type: string
           format: uuid
+          readOnly: true
         firstName:
           type: string
           minLength: 1
