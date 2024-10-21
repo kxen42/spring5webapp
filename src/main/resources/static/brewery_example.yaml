@@ -200,6 +200,10 @@ components:
       type: object
       description: Beer object
       properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
         name:
           type: string
           examples:
