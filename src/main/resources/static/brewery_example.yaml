@@ -29,8 +29,8 @@ paths:
       # parameters in https://spec.openapis.org/oas/latest.html#path-item-object
       # parameter object https://spec.openapis.org/oas/latest.html#parameter-object
       parameters: # uses query parameters
-        - $ref: "#/components/parameters/PageNumberParameter"
-        - $ref: "#/components/parameters/PageSizeParameter"
+        - $ref: '#/components/parameters/PageNumberParameter'
+        - $ref: '#/components/parameters/PageSizeParameter'
       responses:
         '200':
           description: List of Customers
@@ -51,7 +51,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Customer"
+              $ref: '#/components/schemas/Customer'
       responses:
         '201':
           description: Customer created
@@ -63,26 +63,20 @@ paths:
                 format: uri
                 examples:
                   - https://example.com/customers/{assignedCustomerId}
-
+        
         '401':
           description: Not authorized
-
-
+  
+  
   /v1/customers/{customerId}: # uses path variables
     get:
-      summary: Get customer for given customer Id.
+      summary: Get customer.
       description: Get Customer for requied customerId.
       tags:
         - Customers
       operationId: getCustomerByIdV1
       parameters:
-        - name: customerId
-          description: Customer Id
-          in: path
-          schema:
-            type: string
-            format: uuid
-          required: true
+        - $ref: '#/components/parameters/CustomerId'
       responses:
         '200':
           description: 'Found Customer for given customerId'
@@ -92,8 +86,26 @@ paths:
                 $ref: '#/components/schemas/Customer'
         '400':
           description: Request body failed domain validation.
-      #   '404':
-      #    description: Customer not found.
+        '404':
+          description: Customer not found.
+    put:
+      summary: Update customer.
+      description: Update Customer for given customerId.
+      tags:
+        - Customers
+      parameters:
+        - $ref: '#/components/parameters/CustomerId'
+      operationId: updateCustomerV1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        '204': # No Content
+          description: Updated Customer for given customerId.
+
   /v1/beers:
     get:
       summary: Get all beers.
@@ -102,8 +114,8 @@ paths:
         - Beers
       operationId: getBeersV1
       parameters:
-        - $ref: "#/components/parameters/PageNumberParameter"
-        - $ref: "#/components/parameters/PageSizeParameter"
+        - $ref: '#/components/parameters/PageNumberParameter'
+        - $ref: '#/components/parameters/PageSizeParameter'
       responses:
         '200':
           description: List of Beers
@@ -114,7 +126,7 @@ paths:
         '404':
           description: Oh no! We're all out of beer! ☹
     post:
-      summary: Create new beer.
+      summary: Create beer.
       description: Creates new Beer.
       tags:
         - Beers
@@ -139,20 +151,37 @@ paths:
 
   /v1/beers/{beerId}:
     get:
-      summary: Get beer for given id.
+      summary: Get beer.
       description: Get Beer for required beerId.
       tags:
         - Beers
       operationId: getBeerByIdV1
       parameters:
-        - $ref: "#/components/parameters/BeerId"
+        - $ref: '#/components/parameters/BeerId'
       responses:
         '200':
           description: Beer for given beerId.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Beer"
+                $ref: '#/components/schemas/Beer'
+    put:
+      summary: Update beer.
+      description: Update Beer for given beerId.
+      tags:
+        - Beers
+      parameters:
+        - $ref: '#/components/parameters/BeerId'
+      operationId: updateBeerV1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Beer'
+      responses:
+        '204': # No Content
+          description: Updated Beer for given beerId.
   /v1/nachos:
     get:
       summary: Get some nachos.
@@ -348,6 +377,14 @@ components:
       name: beerId
       in: path
       description: Beer Id
+      schema:
+        type: string
+        format: uuid
+      required: true
+    CustomerId:
+      name: customerId
+      in: path
+      description: Customer Id
       schema:
         type: string
         format: uuid
