@@ -19,8 +19,12 @@ Items classes and resources for OpenAPI work is in
 
 [Principles of Web API Design: Delivering Value with APIs and Microservices](https://www.oreilly.com/library/view/principles-of-web/9780137355754/) by James Higgingotham. Published December, 2021.
 
+[Richarson Maturity Model](https://restfulapi.net/richardson-maturity-model/)
+
 [Mastering API Architecture
 Mastering API Architecture](https://www.oreilly.com/library/view/mastering-api-architecture/9781492090625/) by James Gough, Daniel Bryant, Matthew Auburn. Published October, 2022.
+
+[REST in Practice](https://www.oreilly.com/library/view/rest-in-practice/9781449383312/) by Jim Webber, Savas Parastatidis, Ian Robinson. Published September, 2010.
 
 # Specific Sections of OpenAPI Specification v3.1.0
 [OpenAPI Object](https://spec.openapis.org/oas/latest.html#openapi-object) openapi _required_<br>

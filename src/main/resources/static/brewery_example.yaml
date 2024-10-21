@@ -10,7 +10,7 @@ info:
   license:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
-  termsOfService: 'http://example.com/terms'
+  termsOfService: 'https://example.com/terms'
 servers:
   - url: 'https://dev.example.com'
     description: Development Server
@@ -55,6 +55,14 @@ paths:
       responses:
         '201':
           description: Customer created
+          headers:
+            Location:
+              description: Location of created customer.
+              schema:
+                type: string
+                format: uri
+                example: https://example.com/customers/{assignedCustomerId}
+
         '401':
           description: Not authorized
 
@@ -119,6 +127,13 @@ paths:
       responses:
         '201':
           description: Beer created.
+          headers:
+            Location:
+              description: Location of created beer.
+              schema:
+                type: string
+                format: uri
+                example: https://example.com/beers/{assignedBeerId}
 
   /v1/beers/{beerId}:
     get:
