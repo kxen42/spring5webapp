@@ -3,7 +3,6 @@
 Rather than using OAS v3.0.2 that the course covers, I am using OAS v3.1.0.
 
 Most important resources for this repo:
-- [brewery_example.yaml](src/main/resources/static/brewery_example.yaml)
 - [KCHRISTENSON42_1-springframeworkguruopenapicourse-1.0-oas3.1-resolved.yaml](static/KCHRISTENSON42_1-springframeworkguruopenapicourse-1.0-oas3.1-resolved.yaml)
 - [SwaggerHub for this API](https://app.swaggerhub.com/apis/KCHRISTENSON42_1/openapi-brewery/1.0-oas3.1#/default/get_v1_beers__beerId_)
 
