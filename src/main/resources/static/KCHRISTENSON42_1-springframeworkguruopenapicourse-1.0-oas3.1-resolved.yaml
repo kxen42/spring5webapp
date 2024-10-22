@@ -71,7 +71,7 @@ paths:
   /v1/customers/{customerId}: # uses path variables
     get:
       summary: Get customer.
-      description: Get Customer for requied customerId.
+      description: Get Customer by customerId.
       tags:
         - Customers
       operationId: getCustomerByIdV1
@@ -90,7 +90,7 @@ paths:
           description: Customer not found.
     put:
       summary: Update customer.
-      description: Update Customer for given customerId.
+      description: Update Customer by customerId.
       tags:
         - Customers
       parameters:
@@ -104,8 +104,20 @@ paths:
               $ref: '#/components/schemas/Customer'
       responses:
         '204': # No Content
-          description: Updated Customer for given customerId.
-
+          description: Updated Customer by customerId.
+    delete:
+      summary: Delete customer.
+      description: Delete Customer by customerId.
+      tags:
+        - Customers
+      operationId: deleteCustomerV1
+      parameters:
+        - $ref: '#/components/parameters/CustomerId'
+      responses:
+        '200':
+          description: Deleted Customer by customerId.
+        '404':
+          description: Customer not found.
   /v1/beers:
     get:
       summary: Get all beers.
@@ -152,7 +164,7 @@ paths:
   /v1/beers/{beerId}:
     get:
       summary: Get beer.
-      description: Get Beer for required beerId.
+      description: Get Beer by beerId.
       tags:
         - Beers
       operationId: getBeerByIdV1
@@ -167,7 +179,7 @@ paths:
                 $ref: '#/components/schemas/Beer'
     put:
       summary: Update beer.
-      description: Update Beer for given beerId.
+      description: Update Beer by beerId.
       tags:
         - Beers
       parameters:
@@ -181,7 +193,20 @@ paths:
               $ref: '#/components/schemas/Beer'
       responses:
         '204': # No Content
-          description: Updated Beer for given beerId.
+          description: Updated Beer by beerId.
+    delete:
+      summary: Delete beer.
+      description: Delete Beer by beerId.
+      tags:
+        - Beers
+      operationId: deleteBeerV1
+      parameters:
+        - $ref: '#/components/parameters/BeerId'
+      responses:
+        '200':
+          description: Deleted Beer by beerId
+        '404':
+          description: Beer not found.
   /v1/nachos:
     get:
       summary: Get some nachos.
