@@ -22,7 +22,7 @@ paths:
   /v1/customers:
     get:
       summary: Get all customers.
-      description: Get all Customers for optional pageNummber and pageSize.
+      description: Get all Customers for optional pageNumber and pageSize.
       tags:
         - Customers
       operationId: getCustomersV1
@@ -54,7 +54,7 @@ paths:
               $ref: '#/components/schemas/Customer'
       responses:
         '201':
-          description: Customer created
+          description: Customer created.
           headers:
             Location:
               description: Location of created customer.
@@ -64,8 +64,12 @@ paths:
                 examples:
                   - https://example.com/customers/{assignedCustomerId}
 
+        '400':
+          description: Request body failed domain validation.
         '401':
           description: Not authorized
+        '409':
+          description: Conflict
 
 
   /v1/customers/{customerId}: # uses path variables
@@ -79,13 +83,11 @@ paths:
         - $ref: '#/components/parameters/CustomerId'
       responses:
         '200':
-          description: 'Found Customer for given customerId'
+          description: Found Customer for given customerId.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Customer'
-        '400':
-          description: Request body failed domain validation.
         '404':
           description: Customer not found.
     put:
@@ -105,6 +107,12 @@ paths:
       responses:
         '204': # No Content
           description: Updated Customer by customerId.
+        '400':
+          description: Request body failed domain validation.
+        '404':
+          description: Customer not found.
+        '409':
+          description: Conflict
     delete:
       summary: Delete customer.
       description: Delete Customer by customerId.
@@ -160,6 +168,10 @@ paths:
                 format: uri
                 examples:
                   - https://example.com/beers/{assignedBeerId}
+        '400':
+          description: Request body failed domain validation.
+        '409':
+          description: Conflict
 
   /v1/beers/{beerId}:
     get:
@@ -172,11 +184,13 @@ paths:
         - $ref: '#/components/parameters/BeerId'
       responses:
         '200':
-          description: Beer for given beerId.
+          description: Beer for given beerId
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Beer'
+        '404':
+          description: Beer not found.
     put:
       summary: Update beer.
       description: Update Beer by beerId.
@@ -194,6 +208,12 @@ paths:
       responses:
         '204': # No Content
           description: Updated Beer by beerId.
+        '400':
+          description: Request body failed domain validation.
+        '404':
+          description: Beer not found.
+        '409':
+          description: Conflict
     delete:
       summary: Delete beer.
       description: Delete Beer by beerId.
@@ -204,7 +224,7 @@ paths:
         - $ref: '#/components/parameters/BeerId'
       responses:
         '200':
-          description: Deleted Beer by beerId
+          description: Deleted Beer by beerId.
         '404':
           description: Beer not found.
   /v1/nachos:
