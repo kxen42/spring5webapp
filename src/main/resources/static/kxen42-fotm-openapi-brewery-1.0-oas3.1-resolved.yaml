@@ -62,7 +62,7 @@ paths:
                 type: string
                 format: uri
                 examples:
-                  - https://example.com/customers/{assignedCustomerId}
+                  - https://dev.example.com/customers/{assignedCustomerId}
 
         '400':
           description: Request body failed domain validation.
@@ -88,6 +88,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Customer'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Customer'
+            text/plain:
+              schema:
+                type: string
+                examples:
+                  -  |
+                    497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    Fred
+                    Flintstone
+                    123 Stone
+                    Bedrock
+                    SD
+                    57730
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/CustomerCSV'
         '404':
           description: Customer not found.
     put:
@@ -264,12 +282,12 @@ components:
             - SD
           default: MN
           examples:
-            - MN
+            - SD
         zipcode:
           type: string
           pattern: '^\d{5}(?:[-]\d{4})?$'
           examples:
-            - '90210-1234 or 90210'
+            - '57730-0121 or 57730'
     Beer:
       type: object
       description: Beer object
@@ -353,6 +371,12 @@ components:
             - Flintstone
         address:
           $ref: '#/components/schemas/Address'
+    CustomerCSV:
+      type: string
+      examples:
+        -  |
+          ID,FIRSTNAME,LASTNAME,LINE1,CITY,STATECODE,ZIPCODE
+          497f6eca-6276-4993-bfeb-53cbbbba6f08,Fred,Flintstone,123 Stone,Bedrock,SD,57730
     CustomerList:
       type: array
       minItems: 1

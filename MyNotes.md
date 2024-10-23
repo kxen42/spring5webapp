@@ -3,9 +3,8 @@
 Rather than using OAS v3.0.2 that the course covers, I am using OAS v3.1.0.
 
 Most important resources for this repo:
-- [KCHRISTENSON42_1-springframeworkguruopenapicourse-1.0-oas3.1-resolved.yaml](static/KCHRISTENSON42_1-springframeworkguruopenapicourse-1.0-oas3.1-resolved.yaml)
-- [SwaggerHub for this API](https://app.swaggerhub.com/apis/KCHRISTENSON42_1/openapi-brewery/1.0-oas3.1#/default/get_v1_beers__beerId_)
-
+- src/main/resources/static/kxen42-fotm-openapi-brewery-1.0-oas3.1-resolved.yaml
+- https://app.swaggerhub.com/apis/kxen42-fotm/openapi-brewery/1.0-oas3.1
 
 # API Design Guides
 [API Guides Portal: Definitions, Examples, and Tutorials to Get Started | Stoplight](https://stoplight.io/guides)
