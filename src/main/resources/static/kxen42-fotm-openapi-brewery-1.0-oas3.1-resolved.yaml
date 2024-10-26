@@ -2,7 +2,10 @@ openapi: 3.1.0
 info:
   version: 1.0-oas3.1
   title: Spring Framework Guru OpenAPI Course
-  description: For Udemy course about OpenAPI by John Thompson
+  description: |
+    For Udemy course about OpenAPI by John Thompson.
+
+    It includes many examples of features not discussed in the course.
   contact:
     name: John Thompson
     url: 'https://springframework.guru'
@@ -144,6 +147,66 @@ paths:
           description: Deleted Customer by customerId.
         '404':
           description: Customer not found.
+  /v1/customers/{customerId}/orders:
+    post:
+      tags:
+        - Order Service
+      description: Place Order
+      parameters:
+        - name: customerId
+          in: path
+          description: Customer Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BeerOrder'
+        required: false
+      responses:
+        201:
+          description: Order Created
+          headers:
+            Location:
+              description: Reference to created Order
+              style: simple
+              explode: false
+              schema:
+                type: string
+                format: uri
+        400:
+          description: Bad Reqeust
+        404:
+          description: Not Found
+        409:
+          description: Conflict
+      callbacks:
+        orderStatusChange:
+          ${request.body#/orderStatusCallbackUrl}:
+            description: Callback for order status change
+            post:
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                      properties:
+                        orderId:
+                          type: string
+                          format: uuid
+                        orderStatus:
+                          type: string # should be an enum
+              responses:
+                '200':
+                  description: Order was served to customer
+
+
+
   /v1/beers:
     get:
       summary: Get all beers.
@@ -257,7 +320,15 @@ paths:
       responses:
         '404':
           description: We don't serve nachos anymore.
+
+security:
+  - BasicAuth: [] # no scopes
+
 components:
+  securitySchemes:
+    BasicAuth: # use determine the name
+      type: http
+      scheme: basic
   schemas:
     Address:
       type: object
@@ -328,6 +399,56 @@ components:
       maxItems: 10
       items:
         $ref: '#/components/schemas/Beer'
+    BeerOrder:
+      required:
+        - customerId
+      type: object
+      properties:
+        id:
+          oneOf:
+            - type: string
+              format: uuid
+            - type: 'null'
+          readOnly: true
+        customerId:
+          type: string
+          format: uuid
+        customerRef:
+          oneOf:
+            - type: string
+            - type: 'null'
+        beerOrderLines:
+          type: array
+          items:
+            $ref: '#/components/schemas/BeerOrderLine'
+        orderStatusCallbackUrl:
+          type: string
+          format: uri
+    BeerOrderLine:
+      required:
+        - orderQuantity
+        - upc
+      type: object
+      properties:
+        id:
+          oneOf:
+            - type: string
+              format: uuid
+            - type: 'null'
+          readOnly: true
+        beerId:
+          type: string
+          format: uuid
+          readOnly: true
+        upc:
+          type: string
+        orderQuantity:
+          maximum: 999
+          minimum: 1
+          type: integer
+        quantityAllocated:
+          type: ['null', integer]
+          readOnly: true
     BeerPagedList:
       type: object
       properties:
