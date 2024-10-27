@@ -43,6 +43,9 @@ paths:
                 $ref: '#/components/schemas/CustomerPagedList'
         '404':
           description: On no! We have no customers. This isn't Cheers.
+      # override global security
+      # here no security is applied aka anonymous 'auth'
+      security: []
     post:
       summary: Create new customer.
       description: Creates new Customer.
@@ -226,6 +229,9 @@ paths:
                 $ref: '#/components/schemas/BeerPagedList'
         '404':
           description: Oh no! We're all out of beer! ☹
+      # override global security
+      # here no security is applied aka anonymous 'auth'
+      security: []
     post:
       summary: Create beer.
       description: Creates new Beer.
