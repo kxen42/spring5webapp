@@ -323,12 +323,17 @@ paths:
 
 security:
   - BasicAuth: [] # no scopes
+  - JwtAuthToken: []
 
 components:
   securitySchemes:
-    BasicAuth: # use determine the name
+    BasicAuth: # you determine the name
       type: http
       scheme: basic
+    JwtAuthToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT # means token format looks like JWT
   schemas:
     Address:
       type: object
