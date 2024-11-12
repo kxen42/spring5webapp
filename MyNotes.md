@@ -2,6 +2,12 @@
 
 Rather than using OAS v3.0.2 that the course covers, I am using OAS v3.1.0.
 
+To update the Maven wrapper to 3.6.3, run `mvn wrapper:wrapper -D=3.6.3`.
+
+To generate the server code from the API YAML, run `mvn clean compile` or `mvn clean install`.
+_DO NOT_ use the OpenAPI generator plugin directly to generate the source code from the YAML, this
+will not work.
+
 Most important resources for this repo:
 - src/main/resources/static/kxen42-fotm-openapi-brewery-1.0-oas3.1-resolved.yaml
 - https://app.swaggerhub.com/apis/kxen42-fotm/openapi-brewery/1.0-oas3.1
